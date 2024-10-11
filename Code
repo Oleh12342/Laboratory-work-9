@@ -1,0 +1,53 @@
+def create_file_tf20_1():
+    try:
+        with open('TF20_1.txt', 'w', encoding='utf-8') as file:
+            file.write("Сонце сідає за горизонтом, залишаючи небо у яскравих фарбах.\n")
+            file.write("Ми гуляли по лісу, збираючи ягоди та милуючись природою.\n")
+            file.write("Навчання є ключем до майбутніх досягнень та саморозвитку.\n")
+            file.write("Кожен день приносить нові можливості та виклики.\n")
+    except IOError:
+        print("Помилка: не вдалося записати у файл TF20_1.txt")
+
+def find_longest_words():
+    try:
+        with open('TF20_1.txt', 'r', encoding='utf-8') as file:
+            content = file.read()
+    except FileNotFoundError:
+        print("Помилка: файл TF20_1.txt не знайдено")
+        return
+    except IOError:
+        print("Помилка: не вдалося прочитати файл TF20_1.txt")
+        return
+
+    import string
+    words = content.translate(str.maketrans('', '', string.punctuation)).split()
+
+    max_len = max(len(word) for word in words)
+
+    longest_words = [word for word in words if len(word) == max_len]
+
+    try:
+        with open('TF20_2.txt', 'w', encoding='utf-8') as file:
+            file.write(' '.join(longest_words))
+    except IOError:
+        print("Помилка: не вдалося записати у файл TF20_2.txt")
+
+def print_words_from_tf20_2():
+    try:
+        with open('TF20_2.txt', 'r', encoding='utf-8') as file:
+            content = file.read()
+    except FileNotFoundError:
+        print("Помилка: файл TF20_2.txt не знайдено")
+        return
+    except IOError:
+        print("Помилка: не вдалося прочитати файл TF20_2.txt")
+        return
+
+    words = content.split()
+
+    for i in range(0, len(words), 5):
+        print(' '.join(words[i:i+5]))
+
+create_file_tf20_1()
+find_longest_words()
+print_words_from_tf20_2()
